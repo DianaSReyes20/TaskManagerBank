@@ -12,17 +12,21 @@
         box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         margin: 0px 20px;
+        height: 70%;
       "
     >
-      <div style="height: 235px !important">
-        <div style="border-radius: 20px; height: 235px !important; top: 10px">
-          <div style="padding: 20px 0px 0px 20px">
+      <div>
+        <div style="border-radius: 20px; height: 60vh !important; top: 10px">
+          <div style="display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 0px 0px 20px;">
             <img
               loading="eager"
               src="assets/home-page-icons/tasks-icon.png"
               alt="option"
               style="    float: inline-start;
-              width: 8%;
+              width: 40px;
               padding-right: 10px;"
             />
             <h4
@@ -30,18 +34,25 @@
                 color: black !important;
                 font-size: 18px !important;
                 margin: 0 auto;
-                text-align: left;
-                padding-left: 30px;
+                text-align: left !important;
               "
             >
               Listado de tareas
             </h4>
+            <img
+              loading="eager"
+              src="assets/home-page-icons/add.png"
+              alt="option"
+              style="    float: inline-end;
+              width: 40px;
+              padding-right: 10px;"
+            />
           </div>
 
           @if (isLoading) {
-            <ion-content scrollY="false" style="height: 72%; top: 20px">
-              @for (item of [].constructor(2); track item) {
-                  <ion-card class="card_visitas">
+            <ion-content scrollY="true" style="height: 90%; top: 5px">
+              @for (item of [].constructor(5); track item) {
+                  <ion-card class="card_task">
                     <ion-thumbnail>
                       <ion-skeleton-text [animated]="true"></ion-skeleton-text>
                     </ion-thumbnail>
@@ -62,23 +73,19 @@
               }
             </ion-content>
           } @else {
-            <ion-content scrollY="false" style="height: 72%; top: 20px">
+            <ion-content scrollY="true" style="height: 90%; top: 5px">
                 @for (
                   task of taskToShow;
                   track task;
                   let i = $index
                 ) {
-                    <ion-card class="card_visitas">
-                      <div style="height: 60px !important">
+                    <ion-card class="card_task">
+                      <div>
                         <p
-                          #paragraph
-                          class="check-lines"
                           style="
                             color: black !important;
                             font-size: 0.8rem !important;
-                            margin-top: -38px !important;
                             text-align: left;
-                            padding-left: 50px;
                           "
                         >
                           {{ task.title }}
@@ -89,7 +96,13 @@
                           style="
                             font-size: 0.6rem !important;
                           "
-                          >¿Tarea completa? {{ task.completed }}
+                          >¿Tarea completa? 
+                          <ion-icon
+                            [name]="task.completed ? 'checkmark-circle-outline' : 'close-circle-outline'"
+                            [style.color]="task.completed ? 'green' : 'red'"
+                            style="font-size: 0.7rem;">
+                          </ion-icon>
+
                         </span>
                       </p>
                       <p>

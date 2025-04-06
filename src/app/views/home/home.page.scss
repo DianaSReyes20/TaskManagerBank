@@ -9,88 +9,12 @@ span img{
   height: 55px;
 }
 
-.card_visitas {
-  height: 100%;
+.card_task {
+  height: 100px;
   border: 1px solid #28D2CE;
   border-radius: 8px;
-  margin-left: 20%;
-  width: 95%;
-  padding: 5%;
+  margin-left: 15%;
+  width: 70%;
+  padding: 0% 5%;
 }
 
-.card_visitas_usuario {
-  height: 150px;
-  width: 100%;
-  box-shadow: 0px 0px 0px 0px;
-}
-
-swiper-container {
-  width: 100%;
-  height: 100%;
-  --swiper-pagination-bullet-inactive-color: var(--ion-color-step-200); --swiper-pagination-color: var(--ion-color-primary, #3880ff);
-}
-
-swiper-pagination {
-  top: 140px;
-}
-
-.slide_visitas {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 46%!important;
-  height: 140px!important;
-}
-
-.slide_visitas_usuario {
-  display: grid;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 34%!important;
-  height: 150px!important;
-}
-
-.swiper_advertising {
-  transition-duration: 1000ms !important;
-}
-
-.inactive-slide {
-  opacity: 0.5;
-  transition: opacity 0.1s ease;
-  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
-}
-
-.inactive-slide:hover {
-  opacity: 0.9;
-  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); */
-}
-
-.swiper-slide-active {
-  opacity: 1 !important;
-}
-
-.avatar_patients {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 50%;
-}
-
-.avatar_consultas {
-  width: 64px;
-  height: 64px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 10px;
-  border-radius: 50%;
-  margin-left: 10%;
-}
