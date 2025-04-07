@@ -1,17 +1,24 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { CommonAppModuleModule } from "../../common-app-module/common-app-module";
+import { GeneralFunctions } from "../../functions/general-functions"
+import { WelcomeBarComponent } from "../partials/welcome-bar/welcome-bar.component";
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, IonicModule, CommonAppModuleModule, WelcomeBarComponent], // 👈 AQUI IMPORTANTE
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
 })
 export class HomePage {
-  //? para la carga de datos
   isLoading: boolean = true;
   taskToShow: any[] = [];
 
-  constructor() {
+  constructor(
+    public general: GeneralFunctions
+  ) {
     this.taskToShow = [
       { id: 1, title: 'Atender cliente en caja', completed: false, category: 'Caja' },
       { id: 2, title: 'Revisar solicitud de préstamo', completed: true, category: 'Préstamo' },
@@ -22,5 +29,4 @@ export class HomePage {
     ];
     this.isLoading = false;
   }
-
 }

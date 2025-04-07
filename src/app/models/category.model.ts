@@ -1,6 +1,7 @@
+// Modelo de Categoría
 export interface Category {
     id: number;
     name: string;
-    color?: string; // opcional
+    prioridad?: string; // opcional
 }
   

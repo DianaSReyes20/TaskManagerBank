@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-import { WelcomeBarComponent } from "../partials/welcome-bar/welcome-bar.component";
-
+import { CommonAppModuleModule } from "../../common-app-module/common-app-module";
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 @NgModule({
   imports: [
@@ -14,7 +13,8 @@ import { HomePageRoutingModule } from './home-routing.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    WelcomeBarComponent
+    CommonAppModuleModule,
+    TaskFormComponent,
   ],
   declarations: [HomePage]
 })
