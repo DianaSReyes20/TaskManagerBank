@@ -37,7 +37,11 @@
                 text-align: left !important;
               "
             >
-              Nueva categoría
+              @if (!editar) {
+                Nueva categoría
+              } @else {
+                Editar categoría
+              }
             </h4>
           </div>
           <div class="col-md-12 mt-3" style="width: 100%; height: 80%">
@@ -101,6 +105,7 @@
             class="col-12 d-flex"
             style="height: 10%; align-items: flex-start"
           >
+          @if (!editar) {
             <button
               style="width: 100%"
               class="btn btn-issatec-blue"
@@ -108,6 +113,15 @@
             >
               Agregar categoría
             </button>
+          } @else {
+            <button
+              style="width: 100%"
+              class="btn btn-issatec-blue"
+              (click)="editarCategoria(id_edit)"
+            >
+              Editar categoría
+            </button>
+          }
           </div>
         </div>
       </div>
@@ -219,6 +233,15 @@
                             width: 27px;
                             padding-right: 10px;"
                             (click)="eliminarCategoria(category.id)"
+                          />
+                          <img
+                            loading="eager"
+                            src="assets/categories/edit.png"
+                            alt="option"
+                            style="float: inline-end;
+                            width: 27px;
+                            padding-right: 10px;"
+                            (click)="general.goTo('/category-form', { queryParams: { modo: 'formulario', id: category.id, nombre: category.name, prioridad: category.prioridad } })"
                           />
                           <span
                             [style.background]="getColor(category.prioridad)"

@@ -26,6 +26,8 @@ export class CategoryFormComponent  implements OnInit {
   categoriesToShow: any[] = [];
   private storage_: Storage | null = null;
   modo: any;
+  id_edit: number = 0;
+  editar: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +43,15 @@ export class CategoryFormComponent  implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.modo = params['modo'];
+      
+      if (params['nombre'] != "" && params['nombre'] != undefined){
+        this.editar = this.modo === 'formulario' && !!params['id'];
+        this.id_edit = +params['id'];
+        this.formGroup.patchValue({
+          name: params['nombre'],
+          prioridad: params['prioridad']
+        });
+      }
     });
   }
 
@@ -94,7 +105,32 @@ export class CategoryFormComponent  implements OnInit {
     } else {
       console.log('Formulario inválido');
     }
+    this.cargarCategorias();
   }
+
+  async editarCategoria(id: number) {
+    // Obtener categorías actuales
+    const categoriesSaved = await this.storage.get('categories') || [];
+    
+    // Buscar y actualizar la categoría respectiva en la lista
+    const index = categoriesSaved.findIndex((cat: any) => cat.id === id);
+    if (index !== -1) {
+      const categoriaEditada = {
+        id: id,
+        name: this.formGroup.value.name,
+        prioridad: this.formGroup.value.prioridad
+      };
+      
+      categoriesSaved[index] = categoriaEditada; // Actualiza con los nuevos valores
+      await this.storage.set('categories', categoriesSaved);
+      console.log('Categoría actualizada:', this.formGroup.value);
+    } else {
+      console.error('Categoría no encontrada para actualizar');
+    }
+
+    this.cargarCategorias();
+  }
+  
 
   async eliminarCategoria(id: number) {
     // Filtra la tarea que se quiere eliminar por su id

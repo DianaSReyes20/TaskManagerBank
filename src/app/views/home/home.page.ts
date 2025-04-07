@@ -32,6 +32,7 @@ export class HomePage {
     //   { id: 6, title: 'Ofrecer nuevo producto de ahorro', completed: false, category: 'Nuevo producto' }
     // ];
     this.isLoading = false;
+    this.cargarTareas();
   }
 
   ngOnInit() {
@@ -68,4 +69,26 @@ export class HomePage {
       this.tasksToShow = this.tasksToShow.filter(t => !t.completed);
     }
   }
+
+  async cambiarEstado(task: any) {
+    // Alternar el estado
+    task.completed = !task.completed;
+  
+    // Obtener tareas actuales
+    const stored = await this.storage.get('tasks');
+    const tasks = stored || [];
+  
+    // Buscar y actualizar la tarea respectiva en la lista
+    const index = tasks.findIndex((t: any) => t.id === task.id);
+    if (index !== -1) {
+      tasks[index] = task;
+      await this.storage.set('tasks', tasks); // Guardar cambios
+    }
+  
+    // Refrescar la lista visual si es necesario
+    this.tasksToShow = tasks;
+
+    this.cargarTareas();
+  }
+  
 }

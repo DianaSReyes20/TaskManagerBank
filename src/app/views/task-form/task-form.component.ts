@@ -67,7 +67,7 @@ export class TaskFormComponent  implements OnInit {
       const tarea = {
         id: newId,
         ...nuevaTarea,
-        completed: true,
+        completed: false,
       };
 
       tasks.push(tarea);

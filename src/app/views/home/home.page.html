@@ -110,8 +110,10 @@
                           <ion-icon
                             [name]="task.completed ? 'checkmark-circle-outline' : 'close-circle-outline'"
                             [style.color]="task.completed ? 'green' : 'red'"
-                            style="font-size: 0.7rem;">
-                          </ion-icon>
+                            style="font-size: 1rem; cursor: pointer;"
+                            (click)="cambiarEstado(task)"
+                          ></ion-icon>
+
                         </span>
                         <img
                           loading="eager"
