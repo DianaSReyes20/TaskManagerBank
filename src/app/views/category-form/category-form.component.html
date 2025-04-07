@@ -1,113 +1,237 @@
 <app-welcome-bar />
-<div style="height: 100%; width: 100%">
-  <div
-    class="col-12 d-flex justify-content-between align-items-center"
-    style="padding: 0px 25px 10px 25px"
-  >
-  </div>
+@if (modo == "formulario") {
+  <div style="height: 100%; width: 100%">
+    <div
+      class="col-12 d-flex justify-content-between align-items-center"
+      style="padding: 0px 25px 10px 25px"
+    >
+    </div>
 
-  <div
-    style="
-      box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
-      border-radius: 10px;
-      margin: 0px 20px;
-      height: 40%;
-    "
-  >
-    <div>
-      <div style="border-radius: 20px; height: 30vh !important; top: 10px">
-        <div style="display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 0px 0px 20px;">
-          <img
-            loading="eager"
-            src="assets/categories/categories.png"
-            alt="option"
-            style="    float: inline-start;
-            width: 40px;
-            padding-right: 10px;"
-          />
-          <h4
-            style="
-              color: black !important;
-              font-size: 18px !important;
-              margin: 0 auto;
-              text-align: left !important;
-            "
-          >
-            Nueva categoría
-          </h4>
-        </div>
-        <div class="col-md-12 mt-3" style="width: 100%; height: 80%">
-          <form [formGroup]="formGroup" style="padding: 20px;">
-            <div class="row">
-              <div class="col-12" style="padding-top: 2%">
-                <ion-label class="new_label">
-                  Nombre <span style="color: red !important">*</span>
-                </ion-label>
-                <div class="mt-2" style="position: relative">
-                  <ion-input
-                    formControlName="name"
-                    label=""
-                    class="new_input"
-                    label-placement="stacked"
-                    placeholder="Ej: Caja"
-                  ></ion-input>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6" style="padding-top: 2%">
-                <ion-label class="new_label">
-                  Nivel de prioridad <span style="color: red !important">*</span>
-                </ion-label>
-                <div class="input-group mt-2" style="position: relative">
-                  <ion-select
+    <div
+      style="
+        box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        margin: 0px 20px;
+        height: 40%;
+      "
+    >
+      <div>
+        <div style="border-radius: 20px; height: 30vh !important; top: 10px">
+          <div style="display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 0px 0px 20px;">
+            <img
+              loading="eager"
+              src="assets/categories/categories.png"
+              alt="option"
+              style="    float: inline-start;
+              width: 40px;
+              padding-right: 10px;"
+            />
+            <h4
+              style="
+                color: black !important;
+                font-size: 18px !important;
+                margin: 0 auto;
+                text-align: left !important;
+              "
+            >
+              Nueva categoría
+            </h4>
+          </div>
+          <div class="col-md-12 mt-3" style="width: 100%; height: 80%">
+            <form [formGroup]="formGroup" style="padding: 20px;">
+              <div class="row">
+                <div class="col-12" style="padding-top: 2%">
+                  <ion-label class="new_label">
+                    Nombre <span style="color: red !important">*</span>
+                  </ion-label>
+                  <div class="mt-2" style="position: relative">
+                    <ion-input
+                      formControlName="name"
                       label=""
-                      class="custom-select"
+                      class="new_input"
                       label-placement="stacked"
-                      formControlName="prioridad"
-                      interface="popover"
-                      placeholder="Seleccionar"
-                      style="
-                        width: 93% !important;
-                        margin-left: 16px !important;
-                      "
-                    >
-                      <ion-select-option value="Alta"
-                        ><span style="white-space: normal !important"
-                          >Alta</span
-                        ></ion-select-option
-                      >
-                      <ion-select-option value="Media"
-                        ><span style="white-space: normal !important"
-                          >Media</span
-                        ></ion-select-option
-                      >
-                      <ion-select-option value="Baja"
-                        ><span style="white-space: normal !important"
-                          >Baja</span
-                        ></ion-select-option
-                      >
-                    </ion-select>
+                      placeholder="Ej: Caja"
+                    ></ion-input>
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
-        </div>
-        <div
-          class="col-12 d-flex"
-          style="height: 10%; align-items: flex-start"
-        >
-          <button
-            style="width: 100%"
-            class="btn btn-issatec-blue"
+              <div class="row">
+                <div class="col-6" style="padding-top: 2%">
+                  <ion-label class="new_label">
+                    Nivel de prioridad <span style="color: red !important">*</span>
+                  </ion-label>
+                  <div class="input-group mt-2" style="position: relative">
+                    <ion-select
+                        label=""
+                        class="custom-select"
+                        label-placement="stacked"
+                        formControlName="prioridad"
+                        interface="popover"
+                        placeholder="Seleccionar"
+                        style="
+                          width: 93% !important;
+                          margin-left: 16px !important;
+                        "
+                      >
+                        <ion-select-option value="Alta"
+                          ><span style="white-space: normal !important"
+                            >Alta</span
+                          ></ion-select-option
+                        >
+                        <ion-select-option value="Media"
+                          ><span style="white-space: normal !important"
+                            >Media</span
+                          ></ion-select-option
+                        >
+                        <ion-select-option value="Baja"
+                          ><span style="white-space: normal !important"
+                            >Baja</span
+                          ></ion-select-option
+                        >
+                      </ion-select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            class="col-12 d-flex"
+            style="height: 10%; align-items: flex-start"
           >
-            Agregar categoría
-          </button>
+            <button
+              style="width: 100%"
+              class="btn btn-issatec-blue"
+              (click)="agregarCategoria()"
+            >
+              Agregar categoría
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+} @if (modo == "listado") {
+  <div style="height: 100%; width: 100%">
+    <div
+      class="col-12 d-flex justify-content-between align-items-center"
+      style="padding: 0px 25px 10px 25px"
+    >
+    </div>
+      <div
+        style="
+          box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+          border-radius: 10px;
+          margin: 0px 20px;
+          height: 70%;
+        "
+      >
+        <div>
+          <div style="border-radius: 20px; height: 60vh !important; top: 10px">
+            <div style="display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0px 0px 20px;">
+              <img
+                loading="eager"
+                src="assets/categories/categories.png"
+                alt="option"
+                style="    float: inline-start;
+                width: 40px;
+                padding-right: 10px;"
+              />
+              <h4
+                style="
+                  color: black !important;
+                  font-size: 18px !important;
+                  margin: 0 auto;
+                  text-align: left !important;
+                "
+              >
+                Listado de categorías
+              </h4>
+              <img
+                loading="eager"
+                src="assets/home-page-icons/add.png"
+                alt="option"
+                style="float: inline-end;
+                width: 40px;
+                padding-right: 10px;"
+                (click)="general.goTo('/category-form', { queryParams: { modo: 'formulario' } })"
+              />
+            </div>
+            @if (categoriesToShow.length == 0) {
+              <ion-content scrollY="true" style="height: 90%; top: 5px">
+                @for (item of [].constructor(5); track item) {
+                    <ion-card class="card_task">
+                      <ion-thumbnail>
+                        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                      </ion-thumbnail>
+                      <br />
+                      <p>
+                        <ion-skeleton-text
+                          [animated]="true"
+                          style="width: 60%"
+                        ></ion-skeleton-text>
+                      </p>
+                      <p>
+                        <ion-skeleton-text
+                          [animated]="true"
+                          style="width: 30%"
+                        ></ion-skeleton-text>
+                      </p>
+                    </ion-card>
+                }
+              </ion-content>
+            } @else {
+              <ion-content scrollY="true" style="height: 90%; top: 5px">
+                  @for (
+                    category of categoriesToShow;
+                    track category;
+                    let i = $index
+                  ) {
+                      <ion-card class="card_task">
+                        <div>
+                          <p
+                            style="
+                              color: black !important;
+                              font-size: 0.8rem !important;
+                              text-align: left;
+                            "
+                          >
+                            {{ category.name }}
+                          </p>
+                        </div>
+                        <p>
+                          <span
+                            style="
+                              font-size: 0.6rem !important;
+                            "
+                            >Prioridad: {{ category.prioridad }}
+                          </span>
+                          <img
+                            loading="eager"
+                            src="assets/home-page-icons/trash.webp"
+                            alt="option"
+                            style="float: inline-end;
+                            width: 27px;
+                            padding-right: 10px;"
+                            (click)="eliminarCategoria(category.id)"
+                          />
+                          <span
+                            [style.background]="getColor(category.prioridad)"
+                            style="width: 20px; height: 20px; float: inline-end; 
+                              margin-right: 6px; border-radius: 2px;"
+                          ></span>
+                        </p>
+                      </ion-card>
+                  }
+              </ion-content>
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>  
-</div>
+}

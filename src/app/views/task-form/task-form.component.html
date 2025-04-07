@@ -53,8 +53,6 @@
                   label=""
                   class="new_input"
                   label-placement="stacked"
-                  type="number"
-                  onkeypress="return event.keyCode > 47 && event.keyCode < 58"
                   placeholder="Ej: Ofrecer nuevo producto de ahorro"
                 ></ion-input>
               </div>
@@ -71,7 +69,7 @@
                   label=""
                   class="custom-select"
                   label-placement="stacked"
-                  formControlName="prioridad"
+                  formControlName="category"
                   interface="popover"
                   placeholder="Seleccionar"
                   style="
@@ -79,21 +77,12 @@
                     margin-left: 16px !important;
                   "
                 >
-                  <ion-select-option value="Alta"
-                    ><span style="white-space: normal !important"
-                      >Alta</span
-                    ></ion-select-option
+                  <ion-select-option
+                    *ngFor="let categoria of categoriesToShow"
+                    [value]="categoria.name"
                   >
-                  <ion-select-option value="Media"
-                    ><span style="white-space: normal !important"
-                      >Media</span
-                    ></ion-select-option
-                  >
-                  <ion-select-option value="Baja"
-                    ><span style="white-space: normal !important"
-                      >Baja</span
-                    ></ion-select-option
-                  >
+                    {{ categoria.name }}
+                  </ion-select-option>
                 </ion-select>
               </div>
             </div>
@@ -107,6 +96,7 @@
         <button
           style="width: 100%"
           class="btn btn-issatec-blue"
+          (click)="agregarTarea()"
         >
           Agregar tarea
         </button>

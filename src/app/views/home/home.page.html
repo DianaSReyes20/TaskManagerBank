@@ -5,8 +5,6 @@
     style="padding: 0px 25px 10px 25px"
   >
   </div>
-
-  @if (taskToShow.length != 0) {
     <div
       style="
         box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
@@ -49,8 +47,19 @@
               (click)="general.goTo('/task-form', {})"
             />
           </div>
-
-          @if (isLoading) {
+          <ion-segment [(ngModel)]="filtroSeleccionado" (ionChange)="filtrarTareas()" style="margin-top: 10px;">
+            <ion-segment-button value="todas">
+              <ion-label>Todas</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="completadas">
+              <ion-label>Completadas</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="pendientes">
+              <ion-label>Pendientes</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+          
+          @if (tasksToShow.length == 0) {
             <ion-content scrollY="true" style="height: 90%; top: 5px">
               @for (item of [].constructor(5); track item) {
                   <ion-card class="card_task">
@@ -76,7 +85,7 @@
           } @else {
             <ion-content scrollY="true" style="height: 90%; top: 5px">
                 @for (
-                  task of taskToShow;
+                  task of tasksToShow;
                   track task;
                   let i = $index
                 ) {
@@ -111,7 +120,7 @@
                           style="float: inline-end;
                           width: 27px;
                           padding-right: 10px;"
-                          (click)="general.goTo('/category-form', {})"
+                          (click)="eliminarTarea(task.id)"
                         />
                       </p>
                       <p>
@@ -130,7 +139,6 @@
         </div>
       </div>
     </div>
-    }  
     <div style="padding: 20px 20px 10px">
       <div
         style="
@@ -146,7 +154,7 @@
               style="float: inline-end;
               width: 40px;
               padding-right: 10px;"
-              (click)="general.goTo('/category-form', {})"
+              (click)="general.goTo('/category-form', { queryParams: { modo: 'formulario' } })"
             />
           <h4
             style="
@@ -175,6 +183,7 @@
             src="assets/categories/categories.png"
             alt="option"
             style="float: inline-end; width: 30px;"
+            (click)="general.goTo('/category-form', { queryParams: { modo: 'listado' } })"
           />
           <h4
             style="
