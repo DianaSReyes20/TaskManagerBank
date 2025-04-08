@@ -5,6 +5,8 @@ import { CommonAppModuleModule } from "../../common-app-module/common-app-module
 import { GeneralFunctions } from "../../functions/general-functions"
 import { WelcomeBarComponent } from "../partials/welcome-bar/welcome-bar.component";
 import { Storage } from '@ionic/storage-angular';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { getFirestore, enableNetwork } from 'firebase/firestore';
 
 @Component({
   selector: 'app-home',
@@ -18,10 +20,12 @@ export class HomePage {
   tasksToShow: any[] = [];
   tasksToShowFiltered: any[] = [];
   filtroSeleccionado: string = 'todas';
+  mostrarListadoCategorias: boolean = false;
 
   constructor(
     public general: GeneralFunctions,
     private storage: Storage,
+    private firestore: Firestore
   ) {
     // this.tasksToShow = [
     //   { id: 1, title: 'Atender cliente en caja', completed: false, category: 'Caja' },
@@ -33,6 +37,7 @@ export class HomePage {
     // ];
     this.isLoading = false;
     this.cargarTareas();
+    this.obtenerFlagDeFirestore();
   }
 
   ngOnInit() {
@@ -91,4 +96,18 @@ export class HomePage {
     this.cargarTareas();
   }
   
+  async obtenerFlagDeFirestore() {
+    const db = getFirestore();
+    enableNetwork(db)
+      .then(() => console.log("Firestore online"))
+      .catch((err) => console.error("Error al activar red de Firestore:", err));
+
+    const docRef = doc(this.firestore, 'flags/home');
+    const snap = await getDoc(docRef);
+
+    if (snap.exists()) {
+      const data = snap.data();
+      this.mostrarListadoCategorias = data['mostrarListadoCategorias'] ?? false;
+    }
+  }
 }

@@ -61,7 +61,7 @@
           
           @if (tasksToShow.length == 0) {
             <ion-content scrollY="true" style="height: 90%; top: 5px">
-              @for (item of [].constructor(5); track item) {
+              @for (item of [].constructor(3); track item) {
                   <ion-card class="card_task">
                     <ion-thumbnail>
                       <ion-skeleton-text [animated]="true"></ion-skeleton-text>
@@ -172,33 +172,33 @@
         </div>
       </div>
     </div>
-    <div style="padding: 20px 20px 10px">
-      <div
-        style="
-          box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
-          border-radius: 12px;
-        "
-      >
-        <div style="padding: 15px 20px 15px 20px">
-          <img
-            loading="eager"
-            src="assets/categories/categories.png"
-            alt="option"
-            style="float: inline-end; width: 30px;"
-            (click)="general.goTo('/category-form', { queryParams: { modo: 'listado' } })"
-          />
-          <h4
-            style="
-              color: black !important;
-              font-size: 0.9rem !important;
-              margin: 0 auto;
-              text-align: left;
-              padding-left: 30px;
-            "
-          >
-            Ir a "Ver listado de categorías"
-          </h4>
+      <div style="padding: 20px 20px 10px">
+        <div
+          style="
+            box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+          "
+        >
+          <div style="padding: 15px 20px 15px 20px">
+            <img
+              loading="eager"
+              src="assets/categories/categories.png"
+              alt="option"
+              style="float: inline-end; width: 30px;"
+              (click)="general.goTo('/category-form', { queryParams: { modo: 'listado' } })"
+            />
+            <h4
+              style="
+                color: black !important;
+                font-size: 0.9rem !important;
+                margin: 0 auto;
+                text-align: left;
+                padding-left: 30px;
+              "
+            >
+              Ir a "Ver listado de categorías"
+            </h4>
+          </div>
         </div>
       </div>
-    </div>
 </div>
