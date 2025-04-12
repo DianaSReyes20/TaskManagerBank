@@ -10,7 +10,7 @@ Aplicación desarrollada para crear, manejar y editar tareas y sus resectivas ca
 - npm o yarn
 - Ionic CLI
 - Angular CLI
-- Firebase CLI (opcional, si usas funciones o emuladores)
+- Firebase CLI (opcional)
 
 ### Pasos para instalar
 
