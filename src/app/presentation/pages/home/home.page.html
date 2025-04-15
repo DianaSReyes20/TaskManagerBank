@@ -44,7 +44,7 @@
               style="float: inline-end;
               width: 40px;
               padding-right: 10px;"
-              (click)="general.goTo('/task-form', {})"
+              (click)="navigation.navigateTo('/task-form')"
             />
           </div>
           <ion-segment [(ngModel)]="filtroSeleccionado" (ionChange)="filtrarTareas()" style="margin-top: 10px;">
@@ -59,8 +59,8 @@
             </ion-segment-button>
           </ion-segment>
           
-          @if (tasksToShow.length == 0) {
-            <ion-content scrollY="true" style="height: 90%; top: 5px">
+          @if (tasksToShowFiltered.length == 0) {
+            <ion-content scrollY="true" style="height: 85%; top: 5px">
               @for (item of [].constructor(3); track item) {
                   <ion-card class="card_task">
                     <ion-thumbnail>
@@ -83,9 +83,9 @@
               }
             </ion-content>
           } @else {
-            <ion-content scrollY="true" style="height: 90%; top: 5px">
+            <ion-content scrollY="true" style="height: 85%; top: 5px">
                 @for (
-                  task of tasksToShow;
+                  task of tasksToShowFiltered;
                   track task;
                   let i = $index
                 ) {
@@ -156,7 +156,7 @@
               style="float: inline-end;
               width: 40px;
               padding-right: 10px;"
-              (click)="general.goTo('/category-form', { queryParams: { modo: 'formulario' } })"
+              (click)="navigation.navigateTo('/category-form', { queryParams: { modo: 'formulario' } })"
             />
           <h4
             style="
@@ -185,7 +185,7 @@
               src="assets/categories/categories.png"
               alt="option"
               style="float: inline-end; width: 30px;"
-              (click)="general.goTo('/category-form', { queryParams: { modo: 'listado' } })"
+              (click)="navigation.navigateTo('/category-form', { queryParams: { modo: 'listado' } })"
             />
             <h4
               style="

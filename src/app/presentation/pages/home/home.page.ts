@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { CommonAppModuleModule } from "../../common-app-module/common-app-module";
-import { GeneralFunctions } from "../../functions/general-functions"
-import { WelcomeBarComponent } from "../partials/welcome-bar/welcome-bar.component";
+import { FormsModule } from '@angular/forms';
+import { NavigationService } from "../../../domain/services/navigation.service"
+import { WelcomeBarComponent } from "../../../presentation/components/shared/welcome-bar/welcome-bar.component";
 import { Storage } from '@ionic/storage-angular';
+import { TaskService } from '../../../core/services/task.service';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { getFirestore, enableNetwork } from 'firebase/firestore';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, IonicModule, CommonAppModuleModule, WelcomeBarComponent], // 👈 AQUI IMPORTANTE
+  imports: [CommonModule, IonicModule, WelcomeBarComponent, FormsModule], // 👈 AQUI IMPORTANTE
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
@@ -19,12 +20,13 @@ export class HomePage {
   isLoading: boolean = true;
   tasksToShow: any[] = [];
   tasksToShowFiltered: any[] = [];
-  filtroSeleccionado: string = 'todas';
+  filtroSeleccionado: 'todas' | 'completadas' | 'pendientes' = 'todas';
   mostrarListadoCategorias: boolean = false;
 
   constructor(
-    public general: GeneralFunctions,
+    public navigation: NavigationService,
     private storage: Storage,
+    private taskService: TaskService,
     private firestore: Firestore
   ) {
     // this.tasksToShow = [
@@ -37,41 +39,44 @@ export class HomePage {
     // ];
     this.isLoading = false;
     this.cargarTareas();
-    this.obtenerFlagDeFirestore();
+    //this.obtenerFlagDeFirestore();
   }
 
   ngOnInit() {
-    this.initStorage();
     this.cargarTareas();
+    this.filtroSeleccionado = 'todas';
     this.filtrarTareas();
   }
 
-  async initStorage() {
-    await this.storage.create(); // Crea o recupera la instancia del storage
-  }
-
   async cargarTareas() {
-    //if (!this.storageReady) return;
-    const stored = await this.storage.get('tasks');
-    this.tasksToShow = stored || [];
+    this.tasksToShow = await this.taskService.getTasks();
+    this.tasksToShowFiltered = await this.taskService.getTasks();
   }
 
-  async eliminarTarea(id: number) {
-    // Filtra la tarea que se quiere eliminar por su id
-    this.tasksToShow = this.tasksToShow.filter(task => task.id !== id);
-  
-    // Actualiza el storage con el cambio realizado
-    await this.storage.set('tasks', this.tasksToShow);
+  async eliminarTarea(taskId: number) {
+    if (confirm('¿Estás seguro de eliminar esta tarea?')) {
+      try {
+        await this.taskService.deleteTask(taskId);
+        this.tasksToShow = this.tasksToShow.filter(t => t.id !== taskId);
+        this.filtrarTareas();
+      } catch (error) {
+        console.error('Error deleting task:', error);
+      }
+    }
   }
   
   filtrarTareas() {
-    if (this.filtroSeleccionado === 'todas') {
-      this.cargarTareas();
-      this.tasksToShow = [...this.tasksToShow];
-    } else if (this.filtroSeleccionado === 'completadas') {
-      this.tasksToShow = this.tasksToShow.filter(t => t.completed);
-    } else if (this.filtroSeleccionado === 'pendientes') {
-      this.tasksToShow = this.tasksToShow.filter(t => !t.completed);
+    switch(this.filtroSeleccionado) {
+      case 'completadas':
+        this.tasksToShowFiltered = this.tasksToShow.filter(t => t.completed);
+        break;
+      case 'pendientes':
+        this.tasksToShowFiltered = this.tasksToShow.filter(t => !t.completed);
+        break;
+      case 'todas':
+      default:
+        this.tasksToShowFiltered = [...this.tasksToShow];
+        break;
     }
   }
 

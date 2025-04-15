@@ -17,21 +17,21 @@ const routes: Routes = [
   {
     path: 'home',
     loadComponent: () =>
-      import('./views/home/home.page').then(
+      import('./presentation/pages/home/home.page').then(
         (m) => m.HomePage,
       ),
   },
   {
     path: 'task-form',
     loadComponent: () =>
-      import('./views/task-form/task-form.component').then(
+      import('./presentation/pages/task-form/task-form.component').then(
         (m) => m.TaskFormComponent,
       ),
   },
   {
     path: 'category-form',
     loadComponent: () =>
-      import('./views/category-form/category-form.component').then(
+      import('./presentation/pages/category-form/category-form.component').then(
         (m) => m.CategoryFormComponent,
       ),
   },

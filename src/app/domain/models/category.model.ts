@@ -2,6 +2,6 @@
 export interface Category {
     id: number;
     name: string;
-    prioridad?: string; // opcional
+    prioridad: 'Alta' | 'Media' | 'Baja';
 }
   

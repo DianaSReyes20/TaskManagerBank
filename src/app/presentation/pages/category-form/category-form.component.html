@@ -37,7 +37,7 @@
                 text-align: left !important;
               "
             >
-              @if (!editar) {
+              @if (!isEditing) {
                 Nueva categoría
               } @else {
                 Editar categoría
@@ -105,11 +105,11 @@
             class="col-12 d-flex"
             style="height: 10%; align-items: flex-start"
           >
-          @if (!editar) {
+          @if (!isEditing) {
             <button
               style="width: 100%"
               class="btn btn-issatec-blue"
-              (click)="agregarCategoria()"
+              (click)="saveCategory()"
             >
               Agregar categoría
             </button>
@@ -117,7 +117,7 @@
             <button
               style="width: 100%"
               class="btn btn-issatec-blue"
-              (click)="editarCategoria(id_edit)"
+              (click)="saveCategory()"
             >
               Editar categoría
             </button>
@@ -173,7 +173,7 @@
                 style="float: inline-end;
                 width: 40px;
                 padding-right: 10px;"
-                (click)="general.goTo('/category-form', { queryParams: { modo: 'formulario' } })"
+                (click)="navigation.navigateTo('/category-form', { queryParams: { modo: 'formulario' } })"
               />
             </div>
             @if (categoriesToShow.length == 0) {
@@ -241,10 +241,10 @@
                             style="float: inline-end;
                             width: 27px;
                             padding-right: 10px;"
-                            (click)="general.goTo('/category-form', { queryParams: { modo: 'formulario', id: category.id, nombre: category.name, prioridad: category.prioridad } })"
+                            (click)="navigation.navigateTo('/category-form', { queryParams: { modo: 'formulario', id: category.id, nombre: category.name, prioridad: category.prioridad } })"
                           />
                           <span
-                            [style.background]="getColor(category.prioridad)"
+                            [style.background]="getColor(category.prioridad!)"
                             style="width: 20px; height: 20px; float: inline-end; 
                               margin-right: 6px; border-radius: 2px;"
                           ></span>
